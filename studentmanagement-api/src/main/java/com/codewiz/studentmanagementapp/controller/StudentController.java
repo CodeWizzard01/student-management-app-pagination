@@ -39,16 +39,11 @@ public class StudentController {
 
     @GetMapping("/cursor")
     public ResponseEntity<List<Student>> getAllStudentsCursorPagination(
-            @RequestParam(required = false, defaultValue = "99999999999" ) Long cursor,
+            @RequestParam(required = false, defaultValue = "99999999999") Long cursor,
             @RequestParam(defaultValue = "10") int size,
             @ModelAttribute StudentSearchCriteria criteria) {
-        try {
-            List<Student> students = studentService.findStudentsWithCursorAndCriteria(cursor, size, criteria);
-            return new ResponseEntity<>(students, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        List<Student> students = studentService.findStudentsWithCursorAndCriteria(cursor, size, criteria);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
-
-
 }
+
